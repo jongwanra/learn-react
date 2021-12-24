@@ -45,19 +45,19 @@
         <div class="todo-card">
             <h3>장보기</h3>
             <p>토마토, 계란, 초코렛 사기</p>
-            <button>완료</button>
+            <button onClick="changeBackgroundColor(1)">완료</button>
         </div>
     </div>
     <div class="wrap">
         <div class="todo-card">
             <h3>코딩하기</h3>
             <p>리액트 강의 1주차 듣기</p>
-            <button>완료</button>
+            <button onClick="changeBackgroundColor(2)">완료</button>
         </div>
         <div class="todo-card">
             <h3>코딩하기</h3>
             <p>리액트 강의 1주차 듣기</p>
-            <button>완료</button>
+            <button onClick="changeBackgroundColor(3)">완료</button>
         </div>
     </div>
 
@@ -98,6 +98,12 @@
             // 그럼 바꿔봅시다! 저장 -> 브라우저로 돌아가 새로고침하면 확인할 수 있어요. :)
             card.style.backgroundColor = "gray";
         }
+
+        const new_div = document.createElement("div");
+        new_div.style.backgroundColor = "green";
+        new_div.style.height = "100px";
+        new_div.style.width = "100px";
+        document.body.appendChild(new_div);
     </script>
 </body>
 
