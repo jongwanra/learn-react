@@ -1,43 +1,39 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 // BucketList 컴포넌트를 import 해옵니다.
 // import [컴포넌트 명] from [컴포넌트가 있는 파일경로];
 import BucketList from './BucketList';
 import styled from 'styled-components';
 
-// 클래스형 컴포넌트는 이렇게 생겼습니다!
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log('this:', this);
-    // App 컴포넌트의 state를 정의해줍니다.
-    this.state = {
-      list: ['영화관 가기', '매일 책읽기', '수영 배우기'],
-    };
+const App = () => {
+  const [list, setList] = useState([
+    '리덕스 공부',
+    '노래방 가기',
+    '소주 한잔~!',
+  ]);
+  const inputRef = useRef();
 
-    this.text = React.createRef();
-  }
-
-  // 랜더 함수 안에 리액트 엘리먼트를 넣어줍니다!
-  render() {
-    return (
-      <div className="App">
-        <Container>
-          <Title> 내 버킷 리스트</Title>
-          <Line />
-          <BucketList list={this.state.list} />
-        </Container>
-        <div>
-          <input
-            type="text"
-            ref={this.text}
-            onChange={() => console.log(this.text.current.value)}
-          />
-        </div>
+  const addList = () => {
+    const tmp = inputRef.current.value;
+    if (tmp !== '') {
+      setList([...list, tmp]);
+      inputRef.current.value = '';
+    }
+  };
+  return (
+    <div>
+      <Container>
+        <Title> 내 버킷 리스트</Title>
+        <Line />
+        <BucketList list={list} />
+      </Container>
+      <div>
+        <input type="text" ref={inputRef} />
+        <button onClick={addList}>추가하기</button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const Container = styled.div`
   max-width: 350px;

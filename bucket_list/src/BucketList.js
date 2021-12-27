@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BucketList = (props) => {
+  console.log('props:', props.list);
   const my_lists = props.list;
   return (
     <ListStyle>
       {my_lists.map((list, index) => {
-        return <ItemStyle key={index}>{list}</ItemStyle>;
+        return <ItemStyle>{list}</ItemStyle>;
       })}
     </ListStyle>
   );
