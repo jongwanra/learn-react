@@ -1,9 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const Dog = (props) => {
+  const history = useHistory();
   console.log(props);
-  return <div>강아지 화면입니다!</div>;
+  return (
+    <div
+      onClick={() => {
+        history.push('/dog');
+      }}
+    >
+      강아지 화면입니다!
+    </div>
+  );
 };
 
 export default Dog;
