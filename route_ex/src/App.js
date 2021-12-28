@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Link } from 'react-router-dom';
+import Home from './Home';
+import Dog from './Dog';
+import Cat from './Cat';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Link to="/">Home으로 가기</Link>
+        <Link to="/cat">Cat으로 가기</Link>
+        <Link to="/dog">Dog로 가기</Link>
+      </div>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/dog" exact component={Dog}>
+        <Dog />
+      </Route>
+      <Route path="/cat" exact>
+        <Cat />
+      </Route>
     </div>
   );
 }
