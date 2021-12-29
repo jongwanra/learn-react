@@ -2,12 +2,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-const BucketList = (props) => {
-  console.log(props);
-  let history = useHistory();
-  console.log('history: ', history);
-  const my_lists = props.list;
+import { useSelector } from 'react-redux';
 
+const BucketList = (props) => {
+  let history = useHistory();
+  const my_lists = useSelector((a) => {
+    console.log('state:', a);
+    return a.bucket.list;
+  });
   return (
     <ListStyle>
       {my_lists.map((list, index) => {
@@ -16,7 +18,7 @@ const BucketList = (props) => {
             className="list_item"
             key={index}
             onClick={() => {
-              history.push('/detail');
+              history.push('/detail/' + index);
             }}
           >
             {list}
