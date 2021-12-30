@@ -3,10 +3,17 @@
 // Actions
 const CREATE = 'bucket/CREATE';
 const DELETE = 'bucket/DELETE';
+const UPDATE = 'bucket/UPDATE';
 
 // Initial State
 const initialState = {
-  list: ['영화관 가기', '매일 책 읽기', '리듀서 공부'],
+  // list: ['영화관 가기', '매일 책 읽기', '리듀서 공부'],
+  list: [
+    { text: '영화관 가기', completed: false },
+    { text: '매일 책 읽기', completed: false },
+    { text: '리듀서 공부하기', completed: false },
+    { text: '코딩하기', completed: false },
+  ],
 };
 
 // Action Creators
@@ -18,6 +25,9 @@ export function deleteBucket(bucket) {
   return { type: DELETE, bucket };
 }
 
+export function updateBucket(bucket_index) {
+  return { type: UPDATE, bucket_index };
+}
 // Reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -35,6 +45,17 @@ export default function reducer(state = initialState, action = {}) {
       return {
         list: new_bucket_list,
       };
+    }
+    case 'bucket/UPDATE': {
+      console.log('completed!');
+      const new_bucket_list = state.list.map((value, index) => {
+        if (parseInt(action.bucket_index) === index) {
+          return { ...value, completed: true };
+        }
+        return value;
+      });
+
+      return { list: new_bucket_list };
     }
     // do reducer stuff
     default:

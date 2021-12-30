@@ -6,22 +6,23 @@ import { useSelector } from 'react-redux';
 
 const BucketList = (props) => {
   let history = useHistory();
-  const my_lists = useSelector((a) => {
-    console.log('state:', a);
-    return a.bucket.list;
+  const my_lists = useSelector((state) => {
+    console.log('state:', state);
+    return state.bucket.list;
   });
   return (
     <ListStyle>
       {my_lists.map((list, index) => {
         return (
           <ItemStyle
+            completed={list.completed}
             className="list_item"
             key={index}
             onClick={() => {
               history.push('/detail/' + index);
             }}
           >
-            {list}
+            {list.text}
           </ItemStyle>
         );
       })}
@@ -32,15 +33,16 @@ const BucketList = (props) => {
 const ListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 50vh;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+  max-height: 50vh;
 `;
 
 const ItemStyle = styled.div`
   padding: 16px;
   margin: 8px;
-  background-color: aliceblue;
+  background-color: ${(props) => (props.completed ? 'orange' : 'aliceblue')};
 `;
 
 export default BucketList;

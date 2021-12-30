@@ -4,6 +4,7 @@ import React from 'react';
 import BucketList from './BucketList';
 import styled from 'styled-components';
 import Detail from './Detail';
+import Progress from './Progress';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
 import { useDispatch } from 'react-redux';
@@ -20,12 +21,13 @@ function App() {
 
   const addBucketList = () => {
     console.log('text:', text);
-    dispatch(createBucket(text.current.value));
+    dispatch(createBucket({ text: text.current.value, completed: false }));
   };
   return (
     <div className="App">
       <Container>
         <Title>내 버킷리스트</Title>
+        <Progress />
         <Line />
         <Switch>
           <Route path="/detail/:index" exact>
@@ -45,6 +47,11 @@ function App() {
         <button onClick={addBucketList}>추가하기</button>
       </Input>
       {/* 인풋박스와 추가하기 버튼을 넣어줬어요. */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+      >
+        위로 가기
+      </button>
     </div>
   );
 }
