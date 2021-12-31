@@ -9,6 +9,16 @@ import { Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
 import { useDispatch } from 'react-redux';
 import { createBucket } from './redux/modules/bucket';
+import { db } from './firebase';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+} from 'firebase/firestore';
 
 function App() {
   const [list, setList] = React.useState([
@@ -19,10 +29,14 @@ function App() {
   const text = React.useRef(null);
   const dispatch = useDispatch();
 
+  React.useEffect(async () => {
+    addDoc(collection(db, 'buckets'), { text: 'new', completed: false });
+  });
   const addBucketList = () => {
     console.log('text:', text);
     dispatch(createBucket({ text: text.current.value, completed: false }));
   };
+
   return (
     <div className="App">
       <Container>
