@@ -29,7 +29,7 @@ const ProgressBar = styled.div`
 `;
 
 const Highlight = styled.div`
-  background-color: #673ab7;
+  background-color: #a673ff;
   transition: 1s;
   width: ${(props) => props.width};
   height: 20px;

@@ -64,6 +64,27 @@ const Input = styled.div`
   margin: 20px auto;
   border-radius: 5px;
   border: 1px solid #ddd;
+  display: flex;
+  & > * {
+    padding: 5px;
+  }
+  & input {
+    border: 1px solid #888;
+    width: 70%;
+    margin-right: 10px;
+  }
+  & input:focus {
+    /* input은 기본적으로 outline이 존재한다. */
+    outline: none;
+    border: 1px solid #a673ff;
+  }
+
+  & button {
+    width: 25%;
+    color: #fff;
+    border: #a673ff;
+    background-color: #a673ff;
+  }
 `;
 
 const Container = styled.div`
