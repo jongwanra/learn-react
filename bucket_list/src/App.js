@@ -8,7 +8,11 @@ import Progress from './Progress';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
 import { useDispatch } from 'react-redux';
-import { createBucket } from './redux/modules/bucket';
+import {
+  createBucket,
+  loadBucketFB,
+  addBucketFB,
+} from './redux/modules/bucket';
 import { db } from './firebase';
 import {
   collection,
@@ -30,11 +34,13 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(async () => {
-    addDoc(collection(db, 'buckets'), { text: 'new', completed: false });
-  });
+    dispatch(loadBucketFB());
+  }, []);
+
   const addBucketList = () => {
     console.log('text:', text);
-    dispatch(createBucket({ text: text.current.value, completed: false }));
+    // dispatch(createBucket({ text: text.current.value, completed: false }));
+    dispatch(addBucketFB({ text: text.current.value, completed: false }));
   };
 
   return (
