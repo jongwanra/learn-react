@@ -15,10 +15,11 @@ const LOAD = 'bucket/LOAD';
 const CREATE = 'bucket/CREATE';
 const DELETE = 'bucket/DELETE';
 const UPDATE = 'bucket/UPDATE';
+const LOADED = 'bucket/LOADED';
 
 // Initial State
 const initialState = {
-  // list: ['영화관 가기', '매일 책 읽기', '리듀서 공부'],
+  is_loaded: false,
   list: [],
 };
 
@@ -38,6 +39,10 @@ export function updateBucket(bucket_index) {
   return { type: UPDATE, bucket_index };
 }
 
+export function isLoaded(loaded) {
+  return { type: LOADED, loaded };
+}
+
 // middlewares
 export const loadBucketFB = () => {
   return async function (dispatch) {
@@ -45,6 +50,7 @@ export const loadBucketFB = () => {
 
     let bucket_list = [];
     bucket_data.forEach((b) => {
+      console.log('b.data: ', b.data);
       bucket_list.push({ id: b.id, ...b.data() });
     });
 
@@ -54,6 +60,7 @@ export const loadBucketFB = () => {
 
 export const addBucketFB = (bucket) => {
   return async function (dispatch) {
+    dispatch(isLoaded(false));
     const docRef = await addDoc(collection(db, 'bucket'), bucket);
     const _bucket = await getDoc(docRef);
     const bucket_data = { id: _bucket.id, ..._bucket.data() };
@@ -90,21 +97,19 @@ export const deleteBucketFB = (bucket_id) => {
       return b.id === bucket_id;
     });
 
-    console.log('bucket_index:', bucket_index);
     dispatch(deleteBucket(bucket_index));
   };
 };
 // Reducer
 export default function reducer(state = initialState, action = {}) {
+  console.log('current_state: ', state);
   switch (action.type) {
     case 'bucket/LOAD': {
-      return { list: action.bucket_list };
+      return { list: action.bucket_list, is_loaded: true };
     }
     case 'bucket/CREATE': {
       const new_bucket_list = [...state.list, action.bucket];
-      return {
-        list: new_bucket_list,
-      };
+      return { ...state, list: new_bucket_list, is_loaded: true };
     }
     case 'bucket/DELETE': {
       const new_bucket_list = state.list.filter((value, index) => {
@@ -112,10 +117,12 @@ export default function reducer(state = initialState, action = {}) {
           return true;
         }
       });
-      return {
-        list: new_bucket_list,
-      };
+      return { ...state, list: new_bucket_list };
     }
+    case 'bucket/LOADED': {
+      return { ...state, is_loaded: action.loaded };
+    }
+
     case 'bucket/UPDATE': {
       const new_bucket_list = state.list.map((value, index) => {
         if (parseInt(action.bucket_index) === index) {
@@ -124,7 +131,7 @@ export default function reducer(state = initialState, action = {}) {
         return value;
       });
 
-      return { list: new_bucket_list };
+      return { ...state, list: new_bucket_list };
     }
     default:
       return state;

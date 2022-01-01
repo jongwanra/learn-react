@@ -5,9 +5,11 @@ import BucketList from './BucketList';
 import styled from 'styled-components';
 import Detail from './Detail';
 import Progress from './Progress';
+import Spinner from './Spinner';
+
 import { Route, Switch } from 'react-router-dom';
 import NotFound from './NotFound';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   createBucket,
   loadBucketFB,
@@ -32,14 +34,13 @@ function App() {
   ]);
   const text = React.useRef(null);
   const dispatch = useDispatch();
+  const is_loaded = useSelector((state) => state.bucket.is_loaded);
 
   React.useEffect(async () => {
     dispatch(loadBucketFB());
   }, []);
 
   const addBucketList = () => {
-    console.log('text:', text);
-    // dispatch(createBucket({ text: text.current.value, completed: false }));
     dispatch(addBucketFB({ text: text.current.value, completed: false }));
   };
 
@@ -66,12 +67,7 @@ function App() {
         <input type="text" ref={text} />
         <button onClick={addBucketList}>추가하기</button>
       </Input>
-      {/* 인풋박스와 추가하기 버튼을 넣어줬어요. */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-      >
-        위로 가기
-      </button>
+      {!is_loaded && <Spinner />}
     </div>
   );
 }
