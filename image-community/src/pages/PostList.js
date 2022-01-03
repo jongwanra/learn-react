@@ -1,10 +1,11 @@
 import React from 'react';
 import Post from '../components/Post';
+import Header from '../components/Header';
 
 const PostList = (props) => {
   return (
     <React.Fragment>
-      <h1>목록 페이지</h1>
+      <Header />
       <Post />
     </React.Fragment>
   );
