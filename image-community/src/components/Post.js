@@ -1,40 +1,48 @@
-import React from 'react';
-import { Grid, Image, Text } from '../elements/index';
-const Post = (props) => {
-  return (
-    <React.Fragment>
-      <Grid>
-        <Grid is_flex>
-          <Image shape="circle" src={props.src} />
-          <Text bold>{props.user_info.user_name}</Text>
-          <Text>{props.insert_dt}</Text>
-        </Grid>
-        <Grid padding="16px">
-          <Text>{props.contents}</Text>
-        </Grid>
-        <Grid>
-          <Image shape="rectangle" src={props.src} />
-        </Grid>
+import React from "react";
+// import Grid from "../elements/Grid";
+// import Image from "../elements/Image";
+// import Text from "../elements/Text";
 
-        <Grid padding="16px">
-          <Text bold>댓글 {props.comment_cnt}개</Text>
+import {Grid, Image, Text} from "../elements";
+
+
+const Post = (props) => {
+
+    return (
+      <React.Fragment>
+        <Grid>
+          <Grid is_flex padding="16px">
+            <Grid is_flex width="auto">
+              <Image shape="circle" src={props.src} />
+              <Text bold>{props.user_info.user_name}</Text>
+            </Grid>
+            <Grid is_flex width="auto">
+              <Text>{props.insert_dt}</Text>
+            </Grid>
+          </Grid>
+          <Grid padding="16px">
+            <Text>{props.contents}</Text>
+          </Grid>
+          <Grid>
+            <Image shape="rectangle" src={props.src} />
+          </Grid>
+          <Grid padding="16px">
+            <Text bold>댓글 {props.comment_cnt}개</Text>
+          </Grid>
         </Grid>
-      </Grid>
-    </React.Fragment>
-  );
-};
-// props가 없어서 생기는 오류에 대한 방지를 위한 디폴트 props값을 줌
+      </React.Fragment>
+    );
+}
+
 Post.defaultProps = {
   user_info: {
-    user_name: 'jongwan',
-    user_profile:
-      'https://cdn.pixabay.com/photo/2021/12/11/07/59/hotel-6862159__340.jpg',
+    user_name: "mean0",
+    user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
   },
-  image_url:
-    'https://cdn.pixabay.com/photo/2021/12/11/07/59/hotel-6862159__340.jpg',
-  contents: 'beautiful React',
+  image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  contents: "고양이네요!",
   comment_cnt: 10,
-  insert_dt: '2022-01-03 01:29:00',
+  insert_dt: "2021-02-27 10:00:00",
 };
 
 export default Post;
