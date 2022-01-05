@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Text, Input, Grid, Button } from '../elements';
-import { createCookie, getCookie } from '../shared/Cookie';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 const Login = (props) => {
-  const [userId, setUserId] = useState('');
-  const [userPwd, setUserPwd] = useState('');
+  const dispatch = useDispatch();
+  const userId = useRef('');
+  const userPwd = useRef('');
+
+  const login = () => {
+    dispatch(userActions.loginAction({ user_name: 'parl' }));
+  };
   const changeUserId = (e) => {
-    setUserId(e.target.value);
+    userId.current = e.target.value;
   };
 
   const changeUserPwd = (e) => {
-    setUserPwd(e.target.value);
+    userPwd.current = e.target.value;
   };
 
   return (
@@ -22,7 +28,7 @@ const Login = (props) => {
         <Grid padding="16px 0px">
           <Input
             label="아이디"
-            value={userId}
+            ref={userId}
             placeholder="아이디를 입력해주세요."
             _onChange={changeUserId}
           />
@@ -31,7 +37,7 @@ const Login = (props) => {
         <Grid padding="16px 0px">
           <Input
             label="패스워드"
-            value={userPwd}
+            ref={userPwd}
             placeholder="패스워드 입력해주세요."
             _onChange={changeUserPwd}
           />
@@ -40,10 +46,7 @@ const Login = (props) => {
         <Button
           text="로그인하기"
           _onClick={() => {
-            console.log(`userId: ${userId}, userPwd: ${userPwd}`);
-            // createCookie(userId, userPwd);
-            let res = getCookie(userId);
-            console.log('res:', res);
+            login();
           }}
         ></Button>
       </Grid>
