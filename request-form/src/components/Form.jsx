@@ -1,17 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Input from '../elements/Input';
+
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+
 const Form = (props) => {
   const [company, setCompany] = useState('');
   const [name, setName] = useState('');
   const [contact, setContact] = useState('');
   const [position, setPosition] = useState('');
   const [question, setQuestion] = useState('');
+  const [checkbox, setCheckbox] = useState(false);
 
-  const onClick = () => {
-    console.log(
-      `company: ${company}, name: ${name}, contact: ${contact}, position: ${position}, question: ${question}`
-    );
+  const companyRef = useRef(null);
+  const nameRef = useRef(null);
+  const contactRef = useRef(null);
+  const positionRef = useRef(null);
+  const questionRef = useRef(null);
+
+  const checkEmpty = () => {
+    if (!company) {
+      companyRef.current.focus();
+      alert('회사명을 적어주세요.');
+      return false;
+    }
+    if (!name) {
+      nameRef.current.focus();
+      alert('담당자 성함을 적어주세요.');
+      return false;
+    }
+    if (!contact) {
+      contactRef.current.focus();
+      alert('담당자 연락처를 적어주세요.');
+      return false;
+    }
+    if (!position) {
+      positionRef.current.focus();
+      alert('직책을 적어주세요.');
+      return false;
+    }
+    if (!question) {
+      questionRef.current.focus();
+      alert('문의 사항을 적어 주세요.');
+      return false;
+    }
+    return true;
+  };
+
+  const checkCheckBox = () => {
+    if (!checkbox) {
+      alert('개인정보 수집 및 보호정책에 대한 동의가 필요합니다.');
+      return false;
+    }
+    return true;
+  };
+
+  const onClick = async () => {
+    // 적지 않은 정보가 있을 경우
+    if (!checkEmpty()) {
+      return;
+    }
+    // checkBox에 체크가 안되어 있을 경우
+    if (!checkCheckBox()) {
+      return;
+    }
+
+    const user_info = {
+      company,
+      name,
+      contact,
+      position,
+      question,
+    };
+    try {
+      await addDoc(collection(db, 'user'), user_info);
+    } catch (e) {
+      console.log('error: ', e);
+    }
+
+    alert('상담 신청이 완료되었습니다!');
+    setCompany('');
+    setContact('');
+    setName('');
+    setPosition('');
+    setQuestion('');
+    setCheckbox(false);
   };
 
   return (
@@ -27,30 +101,35 @@ const Form = (props) => {
           <InputBox>
             <Input
               marginBottom={'47px'}
+              ref={companyRef}
               value={company}
               placeholder="회사명(ex: 인사이더그램 컴퍼니)"
               onChange={(e) => setCompany(e.target.value)}
             />
             <Input
               marginBottom={'47px'}
+              ref={nameRef}
               placeholder="담당자 성함(ex: 홍길동)"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Input
               marginBottom={'47px'}
+              ref={contactRef}
               placeholder="담당자 연락처"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
             <Input
               marginBottom={'47px'}
+              ref={positionRef}
               placeholder="(ex: 대표)"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
             />
             <Input
               value={question}
+              ref={questionRef}
               placeholder="문의사항 -* 진행을 원하시는 서비스 및 수량에 대하여 작성"
               onChange={(e) => setQuestion(e.target.value)}
               heightInput={'290px'}
@@ -62,7 +141,13 @@ const Form = (props) => {
         <WrapSecond>
           <FooterBox>
             <P>
-              <CheckBox type="checkbox" />
+              <CheckBox
+                type="checkbox"
+                onChange={() =>
+                  checkbox ? setCheckbox(false) : setCheckbox(true)
+                }
+                checked={checkbox}
+              />
               <span>
                 개인정보 수집 및 보호정책 동의 <b>[자세히 보기]</b>
               </span>

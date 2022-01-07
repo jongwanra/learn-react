@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-const Input = (props) => {
-  return <Container {...props} />;
-};
+
+const Input = forwardRef((props, ref) => {
+  return <Container {...props} ref={ref} />;
+});
 
 const Container = styled.input`
   display: block;

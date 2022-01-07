@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from './components/Image';
 import Form from './components/Form';
 import styled from 'styled-components';
