@@ -18,4 +18,5 @@ const ImageBox = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
 `;
+
 export default Image;

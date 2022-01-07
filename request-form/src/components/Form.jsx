@@ -69,9 +69,10 @@ const Form = (props) => {
     const user_info = {
       company,
       name,
-      contact,
+      contact: contact.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
       position,
       question,
+      created_at: new Date().toLocaleString(),
     };
     try {
       await addDoc(collection(db, 'user'), user_info);
@@ -116,7 +117,7 @@ const Form = (props) => {
             <Input
               marginBottom={'47px'}
               ref={contactRef}
-              placeholder="담당자 연락처"
+              placeholder="담당자 연락처(ex: 010-0000-0000)"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
