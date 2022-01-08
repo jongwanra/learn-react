@@ -124,7 +124,7 @@ const Form = (props) => {
             <Input
               marginBottom={'47px'}
               ref={positionRef}
-              placeholder="(ex: 대표)"
+              placeholder="직책 (ex: 대표)"
               value={position}
               onChange={(e) => setPosition(e.target.value)}
             />
