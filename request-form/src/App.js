@@ -2,22 +2,21 @@ import React from 'react';
 import Image from './components/Image';
 import Form from './components/Form';
 import styled from 'styled-components';
-import { img1, img2, img3, img4 } from './assets/images/index.js';
+import { imgOrigin } from './assets/images/index.js';
 
 function App() {
   return (
     <Container className="App">
-      <Image imgUrl={img1} height={'1478px'} />
-      <Image imgUrl={img2} height={'1698px'} />
-      <Image imgUrl={img3} height={'1470px'} />
-      <Image imgUrl={img4} height={'812px'} />
+      <Image imgUrl={imgOrigin} />
       <Form />
     </Container>
   );
 }
 
 const Container = styled.div`
+  width: 1100px;
+  height: 100%;
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
 `;
 export default App;
