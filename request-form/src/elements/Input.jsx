@@ -16,7 +16,7 @@ const Container = styled.input`
   height: ${(props) => (props.heightInput ? props.heightInput : '90px')};
   margin-bottom: ${(props) =>
     props.marginBottom ? props.marginBottom : '0px'};
-  font-size: 30px;
+  font-size: 1.3rem;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   color: #969696;
 `;

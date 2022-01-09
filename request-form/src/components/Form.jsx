@@ -165,29 +165,43 @@ const ContainerFirst = styled.div`
   font-family: '맑은 고딕';
   margin: 0 auto;
   padding: 95px 70px;
-  width: inherit;
-  width: 1100px;
   height: ${1486 - 312 + 70}px;
   background-color: #0ba5e2;
-  background-position: center top;
-  background-size: 100% auto;
   box-sizing: border-box;
+  @media screen and (max-width: 805px) {
+    padding: 20px;
+    height: auto;
+  }
 `;
 
 const ContainerSecond = styled.div`
   font-family: '맑은 고딕';
   margin: 0 auto;
   padding: 47px 70px 99px;
-  width: inherit;
-  width: 1100px;
   height: 312px;
   background-size: 100% auto;
   box-sizing: border-box;
+  @media screen and (max-width: 805px) {
+    width: 100%;
+    padding: 20px;
+    height: auto;
+    box-sizing: border-box;
+  }
 `;
 const WrapFirst = styled.div`
   margin: 0 auto;
   width: 100%;
   height: ${1486 - 312}px;
+  @media screen and (max-width: 805px) {
+    height: auto;
+    input {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  }
 `;
 
 const WrapSecond = styled.div`
@@ -206,12 +220,21 @@ const Button = styled.button`
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   color: white;
   font-size: 30px;
+  @media screen and (max-width: 805px) {
+    height: auto;
+    padding: 20px 10px;
+    font-size: 1rem;
+  }
 `;
 
 const TitleBox = styled.div`
   width: 100%;
   height: 135px;
   margin-bottom: 95px;
+  @media screen and (max-width: 805px) {
+    height: auto;
+    margin-bottom: 30px;
+  }
 `;
 
 const MainTitle = styled.h1`
@@ -219,10 +242,16 @@ const MainTitle = styled.h1`
   height: 60px;
   text-align: center;
   line-height: 60px;
-  font-size: 3.4em;
+  font-size: 3.4rem;
   margin: 0 0 35px 0;
   padding: 0;
   color: #fff;
+
+  @media screen and (max-width: 805px) {
+    height: auto;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
 `;
 
 const SubTitle = styled.h2`
@@ -230,9 +259,15 @@ const SubTitle = styled.h2`
   height: 40px;
   text-align: center;
   line-height: 40px;
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: lighter;
   color: #fff;
+
+  @media screen and (max-width: 805px) {
+    height: auto;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
 `;
 
 const FooterBox = styled.div`
@@ -241,6 +276,16 @@ const FooterBox = styled.div`
 `;
 const InputBox = styled.div`
   width: 100%;
+  min-width: 375px;
+  @media screen and (max-width: 805px) {
+    min-width: 100%;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    & :last-child {
+      height: 150px;
+      font-size: 0.7rem;
+    }
+  }
 `;
 
 const P = styled.p`
@@ -255,6 +300,18 @@ const P = styled.p`
   display: flex;
   justify-content: left;
   align-items: center;
+
+  @media screen and (max-width: 805px) {
+    height: auto;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: 375px) {
+    height: auto;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
 `;
 
 const CheckBox = styled.input`
@@ -262,6 +319,12 @@ const CheckBox = styled.input`
   width: 40px;
   height: 40px;
   line-height: 40px;
+
+  @media screen and (max-width: 805px) {
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export default Form;

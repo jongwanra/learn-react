@@ -1,22 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 const Image = (props) => {
-  return (
-    <>
+  return ( 
+    <Container>
       <ImageBox {...props}></ImageBox>
-    </>
+    </Container>
   );
 };
 
-const ImageBox = styled.div`
-  margin: 0 auto;
-  width: inherit;
+const Container = styled.div``;
+const ImageBox = styled.img.attrs((props) => ({
+  src: props.imgUrl,
+}))`
+  display: block;
   width: 100%;
-  height: 5500px;
-  background-image: url(${(props) => props.imgUrl});
-  background-position: center center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
 `;
 
 export default Image;
