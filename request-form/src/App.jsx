@@ -3,6 +3,7 @@ import Image from './components/Image';
 import Form from './components/Form';
 import styled from 'styled-components';
 import { img1, img2, img3, img4 } from './assets/images/index.js';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Image imgUrl={img3} />
         <Image imgUrl={img4} />
         <Form />
+        <Footer />
       </Wrapper>
     </Container>
   );
