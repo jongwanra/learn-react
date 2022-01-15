@@ -1,12 +1,12 @@
 import React from "react";
 import AppLayout from "../src/components/AppLayout";
 
-const Home = () => {
+const Profile = () => {
   return (
     <AppLayout>
-      <div>Home</div>
+      <div>Profile</div>
     </AppLayout>
   );
 };
 
-export default Home;
+export default Profile;
