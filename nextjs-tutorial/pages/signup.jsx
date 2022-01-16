@@ -1,11 +1,17 @@
 import React from "react";
-import AppLayout from "../src/components/AppLayout";
+import { AppLayout } from "../src/components";
+import Head from "next/head";
 
 const SignUp = () => {
   return (
-    <AppLayout>
-      <div>SignUp</div>
-    </AppLayout>
+    <>
+      <Head>
+        <title>회원가입 | NodeBird</title>
+      </Head>
+      <AppLayout>
+        <div>SignUp</div>
+      </AppLayout>
+    </>
   );
 };
 

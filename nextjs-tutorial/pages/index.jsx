@@ -1,5 +1,5 @@
 import React from "react";
-import AppLayout from "../src/components/AppLayout";
+import { AppLayout } from "../src/components";
 
 const Home = () => {
   return (
