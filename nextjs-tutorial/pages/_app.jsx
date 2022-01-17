@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import "antd/dist/antd.css";
 // next 에서 제공해주는 head태그
 import Head from "next/head";
+import wrapper from "../store/configureStore";
 
 const Nodebird = ({ Component }) => {
   return (
@@ -18,8 +19,8 @@ const Nodebird = ({ Component }) => {
   );
 };
 
-Nodebird.prototype = {
+Nodebird.propTypes = {
   Component: PropTypes.elementType.isRequired,
 };
 
-export default Nodebird;
+export default wrapper.withRedux(Nodebird);

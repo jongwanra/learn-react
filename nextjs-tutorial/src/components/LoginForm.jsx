@@ -1,17 +1,22 @@
-import Link from "next/link";
-import { useCallback, useState } from "react";
-import { Form, Input, Button } from "antd";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import useInput from "../hooks/useInput";
 
-export const LoginForm = ({ setIsLoggedIn }) => {
+import Link from "next/link";
+import { Form, Input, Button } from "antd";
+
+import useInput from "../hooks/useInput";
+import { useSelector, useDispatch } from "react-redux";
+import { loginAction } from "../../reducers";
+
+export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const [id, onChangeId] = useInput(""); // custom hook
   const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    console.log(id, password);
-    setIsLoggedIn(true);
+    console.log(`id: ${id} / password: ${password}`);
+    dispatch(loginAction({ id, password }));
   }, [id, password]);
 
   return (
@@ -42,10 +47,6 @@ export const LoginForm = ({ setIsLoggedIn }) => {
       </ButtonWrapper>
     </FormWrapper>
   );
-};
-
-LoginForm.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 const FormWrapper = styled(Form)`
