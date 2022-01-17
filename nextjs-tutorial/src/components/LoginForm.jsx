@@ -2,27 +2,12 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 import { Form, Input, Button } from "antd";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+import useInput from "../hooks/useInput";
 
 export const LoginForm = ({ setIsLoggedIn }) => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  //   const [passwordCheck, setPasswordCheck] = useState("");
-
-  // Component에 props로 넘기는 친구들은 useCallback을 꼭 써줘야 최적화가 된다.
-  const onChangeId = useCallback(
-    (e) => {
-      setId(e.target.value);
-    },
-    [id]
-  );
-
-  // Component에 props로 넘기는 친구들은 useCallback을 꼭 써줘야 최적화가 된다.
-  const onChangePassword = useCallback(
-    (e) => {
-      setPassword(e.target.value);
-    },
-    [password]
-  );
+  const [id, onChangeId] = useInput(""); // custom hook
+  const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
     console.log(id, password);
@@ -57,6 +42,10 @@ export const LoginForm = ({ setIsLoggedIn }) => {
       </ButtonWrapper>
     </FormWrapper>
   );
+};
+
+LoginForm.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 const FormWrapper = styled(Form)`
