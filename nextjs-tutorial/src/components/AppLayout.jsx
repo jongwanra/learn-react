@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 export const AppLayout = ({ children }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  console.log("isLoggedIn:", isLoggedIn);
   return (
     <div>
       <Menu mode="horizontal">

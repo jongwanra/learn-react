@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Form, Input, Button } from "antd";
 
 import useInput from "../hooks/useInput";
-import { useSelector, useDispatch } from "react-redux";
-import { loginAction } from "../../reducers";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../../reducers/user";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
