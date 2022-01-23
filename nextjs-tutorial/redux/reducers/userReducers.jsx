@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoggedIn: false,
-  user: null,
+  me: null,
   signUpData: {},
   loginData: {},
 };
@@ -13,11 +13,11 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.isLoggedIn = true;
-      state.loginData = action.payload;
+      state.me = action.payload;
     },
     logout: (state) => {
       state.isLoggedIn = false;
-      state.user = null;
+      state.me = null;
     },
   },
 });

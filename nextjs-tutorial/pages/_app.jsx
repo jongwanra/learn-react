@@ -1,9 +1,9 @@
 // 모든 page들의 공통적인 부분들을 담당하는 컴포넌트
 import React from "react";
+import Head from "next/head";
 import PropTypes from "prop-types";
 import "antd/dist/antd.css";
 // next 에서 제공해주는 head태그
-import Head from "next/head";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 

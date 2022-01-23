@@ -14,8 +14,7 @@ export const LoginForm = () => {
   const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    console.log(`id: ${id} / password: ${password}`);
-    dispatch(login([id, password]));
+    dispatch(login({ id, password }));
   }, [id, password]);
 
   return (
