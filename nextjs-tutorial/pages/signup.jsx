@@ -16,6 +16,7 @@ const SignUp = () => {
     setTerm(e.target.checked);
     setTermError(false);
   }, []);
+
   const onSubmit = useCallback(() => {
     if (password !== passwordCheck) {
       return setPasswordError(false);

@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 import Link from "next/link";
 import { Form, Input, Button } from "antd";
-
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../../reducers/user";
+import { login } from "../../redux/reducers/userReducers";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ export const LoginForm = () => {
 
   const onSubmitForm = useCallback(() => {
     console.log(`id: ${id} / password: ${password}`);
-    dispatch(loginAction({ id, password }));
+    dispatch(login([id, password]));
   }, [id, password]);
 
   return (
