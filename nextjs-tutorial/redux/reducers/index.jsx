@@ -1,5 +1,5 @@
 import userReducer from "./userReducers";
 import postReducer from "./postReducers";
 import counterReducer from "./counterReducers";
-
-export { userReducer, postReducer, counterReducer };
+import { pokemonApi } from "./pokemon";
+export { userReducer, postReducer, counterReducer, pokemonApi };

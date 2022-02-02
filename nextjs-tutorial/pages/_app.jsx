@@ -6,7 +6,6 @@ import "antd/dist/antd.css";
 // next 에서 제공해주는 head태그
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
-
 const Nodebird = ({ Component }) => {
   return (
     <Provider store={store}>
